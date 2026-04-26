@@ -16,7 +16,7 @@ A \code{data.frame} with the following two variables:
 \description{
 This function returns a list of all available licenses. This is particularly
 useful to get the right spelling of the license to be passed to
-\code{\link[=new_package]{new_package()}}, \code{\link[=new_compendium]{new_compendium()}}, or \code{\link[=add_license]{add_license()}}.
+\code{\link[=create_new_package]{create_new_package()}}, \code{\link[=create_new_compendium]{create_new_compendium()}}, or \code{\link[=add_license]{add_license()}}.
 }
 \examples{
 get_licenses()

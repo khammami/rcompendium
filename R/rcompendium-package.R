@@ -15,8 +15,8 @@
 #' 1. Store your credentials (given and family names, email, ORCID, etc.) with
 #'   [set_credentials()] (if not already done);
 #' 2. Create an new empty RStudio project;
-#' 3. Run [new_package()] to create a new package structure or
-#'   [new_compendium()] to create a new research compendium structure;
+#' 3. Run [create_new_package()] to create a new package structure or
+#'   [create_new_compendium()] to create a new research compendium structure;
 #' 4. Edit some metadata in `DESCRIPTION`, `CITATION`, and `README.Rmd`;
 #' 5. Start working (add data, write and document R functions, etc.);
 #' 6. And do not forget to commit your changes.
@@ -25,9 +25,9 @@
 #' @section Managing credentials:
 #'
 #' You can use the arguments `given`, `family`, `email`, and `orcid`
-#' directly with the functions `new_*()` and `add_*()`. But if you create
-#' a lot a projects (packages and/or compendia) it can be frustrating in the
-#' long run.
+#' directly with the functions `create_new_*()` and `add_*()`. But if you 
+#' create a lot a projects (packages and/or compendia) it can be frustrating in
+#' the long run.
 #'
 #' An alternative way is to use **ONCE AND FOR ALL** the function
 #' [set_credentials()] to permanently store this information in the
@@ -37,7 +37,7 @@
 #'
 #' Even if you have stored your credentials in the `~/.Rprofile` file you will
 #' always be able to modify them on-the-fly (i.e. by using credentials arguments
-#' in the functions `new_*()` and `add_*()`) or permanently by re-running
+#' in the functions `create_new_*()` and `add_*()`) or permanently by re-running
 #' [set_credentials()].
 #'
 #'

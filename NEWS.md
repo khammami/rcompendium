@@ -7,6 +7,7 @@
   * `refresh()` is no more available in this version ([#91](https://github.com/FRBCesab/rcompendium/pull/91))
   * Refactor all functions by introducing new helpers ([#102](https://github.com/FRBCesab/rcompendium/pull/102))
   * A new argument (user credential) has been implemented: `github_user`. The GitHub username is not guessed from `gh::gh_whoami()` anymore and the user needs to provide it. This new argument has been added to `set_credentials()` ([#125](https://github.com/FRBCesab/rcompendium/pull/125)) to permanently store this value.
+  * Rename `new_*()` functions in `create_new_*()`
 
 * **New features**
 

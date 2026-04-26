@@ -13,7 +13,7 @@ recursively detect dependencies to be added to the \code{Imports} field of
 \verb{data/}, \verb{outputs/}, \verb{figures/}, etc. have been created in this folder),
 \code{'.'} (if folders \verb{data/}, \verb{outputs/}, \verb{figures/}, etc. have been created
 at the root of the project), etc.
-See \code{\link[=new_compendium]{new_compendium()}} for further information.
+See \code{\link[=create_new_compendium]{create_new_compendium()}} for further information.
 
 Default is \code{compendium = NULL} (i.e. no additional folder are inspected
 but \verb{R/}, \code{NAMESPACE}, \verb{vignettes/}, and \verb{tests/} are still inspected).}

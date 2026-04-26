@@ -4,7 +4,7 @@
 #' This function creates a Make-like R file (`make.R`) at the root of the
 #' project based on a template. To be used only if the project is a research
 #' compendium. The content of this file provides some guidelines. See also
-#' [new_compendium()] for further information.
+#' [create_new_compendium()] for further information.
 #'
 #' @inheritParams add_citation
 #' @inheritParams set_credentials
