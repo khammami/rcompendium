@@ -205,20 +205,7 @@ stop_if_null_or_empty <- function(value, name) {
 #' Error if the current working directory is not a project/package
 #' @noRd
 stop_if_not_project <- function() {
-  markers <- c(
-    "DESCRIPTION",
-    ".git",
-    paste0(basename(getwd()), ".Rproj"),
-    ".here",
-    "renv.lock",
-    ".vscode/settings.json",
-    "_pkgdown.yaml",
-    "_pkgdown.yml",
-    "_quarto.yaml",
-    "_quarto.yml"
-  )
-
-  if (all(!file.exists(markers))) {
+  if (!assert_project_file_detected()) {
     stop(paste0(
       "The path '",
       getwd(),
@@ -569,23 +556,13 @@ create_r_profile_if_needed <- function() {
 }
 
 
+#' Initialize project (create .here if require)
+#' @param quiet a logical of length 1.
+#' @noRd
 initialize_project <- function(quiet = FALSE) {
   ui_title("Initializing project", quiet)
 
-  markers <- c(
-    "DESCRIPTION",
-    ".git",
-    paste0(basename(getwd()), ".Rproj"),
-    ".here",
-    "renv.lock",
-    ".vscode/settings.json",
-    "_pkgdown.yaml",
-    "_pkgdown.yml",
-    "_quarto.yaml",
-    "_quarto.yml"
-  )
-
-  if (all(!file.exists(markers))) {
+  if (!assert_project_file_detected()) {
     content <- list.files(getwd(), all.files = TRUE, no.. = TRUE)
     if (length(content) == 0) {
       invisible(file.create(".here"))
@@ -616,4 +593,28 @@ ui_project_initialized <- function(path, quiet = FALSE) {
   }
 
   invisible(NULL)
+}
+
+
+#' Assert if current directory is an R project
+#' @noRd
+assert_project_file_detected <- function() {
+  markers <- c(
+    "DESCRIPTION",
+    ".git",
+    paste0(basename(getwd()), ".Rproj"),
+    ".here",
+    "renv.lock",
+    ".vscode/settings.json",
+    "_pkgdown.yaml",
+    "_pkgdown.yml",
+    "_quarto.yaml",
+    "_quarto.yml"
+  )
+
+  if (all(!file.exists(markers))) {
+    return(FALSE)
+  } else {
+    return(TRUE)
+  }
 }
