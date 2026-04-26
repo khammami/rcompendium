@@ -165,8 +165,8 @@
 #'   For further information see [set_credentials()] and below the section
 #'   **Managing credentials**.
 #'
-#' @param github_user A character vector of length 1. The GitHub account name 
-#'   of the maintainer of the package. If `NULL` (default) the function will 
+#' @param github_user A character vector of length 1. The GitHub account name
+#'   of the maintainer of the package. If `NULL` (default) the function will
 #'   try to get this value by reading the `.Rprofile` file.
 #'
 #'   For further information see [set_credentials()] and below the section
