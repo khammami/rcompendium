@@ -90,7 +90,7 @@ add_badge <- function(badge, pattern) {
   badge_start <- grep("<!-- badges: start -->", read_me)
   badge_end <- grep("<!-- badges: end -->", read_me)
 
-  if (!length(badge_start) || !length(badge_start)) {
+  if (!length(badge_start) || !length(badge_end)) {
     stop(
       "Unable to parse badges location in 'README.Rmd' file.\n",
       "Did you remove the tag '<!-- badges: start -->' and/or ",
