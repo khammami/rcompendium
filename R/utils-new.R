@@ -211,7 +211,11 @@ stop_if_not_project <- function() {
     paste0(basename(getwd()), ".Rproj"),
     ".here",
     "renv.lock",
-    ".vscode/settings.json"
+    ".vscode/settings.json",
+    "_pkgdown.yaml",
+    "_pkgdown.yml",
+    "_quarto.yaml",
+    "_quarto.yml"
   )
 
   if (all(!file.exists(markers))) {
@@ -562,4 +566,54 @@ create_r_profile_if_needed <- function() {
   }
 
   invisible(r_profile_path)
+}
+
+
+initialize_project <- function(quiet = FALSE) {
+  ui_title("Initializing project", quiet)
+
+  markers <- c(
+    "DESCRIPTION",
+    ".git",
+    paste0(basename(getwd()), ".Rproj"),
+    ".here",
+    "renv.lock",
+    ".vscode/settings.json",
+    "_pkgdown.yaml",
+    "_pkgdown.yml",
+    "_quarto.yaml",
+    "_quarto.yml"
+  )
+
+  if (all(!file.exists(markers))) {
+    content <- list.files(getwd(), all.files = TRUE, no.. = TRUE)
+    if (length(content) == 0) {
+      invisible(file.create(".here"))
+      ui_file_written(".here", quiet)
+    } else {
+      stop(
+        paste0(
+          "The path '",
+          getwd(),
+          "' is not empty and does not appear to be an R project."
+        )
+      )
+    }
+  }
+
+  ui_project_initialized(getwd(), quiet)
+  invisible(NULL)
+}
+
+
+#' Inform user that the project has been initiliazed
+#' @param path a character of length of 1. The absolute path of the project.
+#' @param quiet a logical of length 1.
+#' @noRd
+ui_project_initialized <- function(path, quiet = FALSE) {
+  if (!quiet) {
+    cli::cli_alert_success("Setting active project to {.val {path}}")
+  }
+
+  invisible(NULL)
 }

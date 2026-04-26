@@ -250,11 +250,7 @@ create_new_compendium <- function(
   overwrite = FALSE,
   quiet = FALSE
 ) {
-  ## If not RStudio ----
-
-  if (!rstudioapi::isAvailable()) {
-    if (!file.exists(".here")) file.create(".here")
-  }
+  initialize_project(quiet)
 
   ## Check for inceptions ----
 
