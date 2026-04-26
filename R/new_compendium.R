@@ -175,6 +175,12 @@
 #'
 #'   For further information see [set_credentials()].
 #'
+#' @param github_user A character vector of length 1. The GitHub account name
+#'   of the maintainer of the package. If `NULL` (default) the function will
+#'   try to get this value by reading the `.Rprofile` file.
+#'
+#'   For further information see [set_credentials()].
+#'
 #' @param organisation A character vector of length 1. The GitHub organisation
 #'   to host the repository. If defined it will overwrite the GitHub pseudo.
 #'
@@ -232,6 +238,7 @@ new_compendium <- function(
   family = NULL,
   email = NULL,
   orcid = NULL,
+  github_user = NULL,
   organisation = NULL,
   renv = FALSE,
   dockerfile = FALSE,
@@ -251,7 +258,7 @@ new_compendium <- function(
 
   ## Check if git is well configured ----
 
-  github <- gh::gh_whoami()$"login"
+  github <- github_user %||% getOption("github_user")
 
   if (is.null(github)) {
     stop(

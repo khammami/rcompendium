@@ -26,6 +26,7 @@ new_package(
   family = NULL,
   email = NULL,
   orcid = NULL,
+  github_user = NULL,
   organisation = NULL,
   overwrite = FALSE,
   quiet = FALSE
@@ -160,6 +161,13 @@ For further information see \code{\link[=set_credentials]{set_credentials()}} an
 \item{orcid}{A character vector of length 1. The ORCID of the maintainer of
 the package. If \code{NULL} (default) the function will try to get this value
 by reading the \code{.Rprofile} file.
+
+For further information see \code{\link[=set_credentials]{set_credentials()}} and below the section
+\strong{Managing credentials}.}
+
+\item{github_user}{A character vector of length 1. The GitHub account name
+of the maintainer of the package. If \code{NULL} (default) the function will
+try to get this value by reading the \code{.Rprofile} file.
 
 For further information see \code{\link[=set_credentials]{set_credentials()}} and below the section
 \strong{Managing credentials}.}

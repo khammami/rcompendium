@@ -1,13 +1,8 @@
-#' Get project full path
-#' @noRd
-get_proj_path <- function() usethis::proj_get()
-
-
 #' Build an absolute path
 #' @param ... one or several folder/file names
 #' @noRd
 build_full_path <- function(...) {
-  file.path(get_proj_path(), ...)
+  file.path(path_proj(), ...)
 }
 
 
@@ -50,6 +45,8 @@ resolve_project_meta <- function(...) {
   family <- args$family %||% getOption("family")
   email <- args$email %||% getOption("email")
   orcid <- args$orcid %||% getOption("orcid")
+  github_user <- args$github_user %||% getOption("github_user")
+  github_account <- args$organisation %||% github_user
 
   list(
     given = given,
@@ -62,8 +59,8 @@ resolve_project_meta <- function(...) {
     license = get_project_license_name(),
     license_url = get_project_license_url(),
 
-    github_user = get_github_user(),
-    github_account = resolve_github_account(args$organisation),
+    github_user = github_user,
+    github_account = github_account,
     git_branch = get_git_branch_name(),
 
     r_version = paste(
@@ -77,36 +74,6 @@ resolve_project_meta <- function(...) {
     year = format(Sys.Date(), "%Y"),
     date = format(Sys.time(), "%Y/%m/%d")
   )
-}
-
-
-#' Retrieve GitHub account of the repo
-#' @param organisation a character of length 1 (optional). The name of the GH
-#'   organisation. If `NULL` (default), the user account is used.
-#' @noRd
-resolve_github_account <- function(organisation = NULL) {
-  if (!is.null(organisation)) {
-    stop_if_not_string(organisation)
-    return(organisation)
-  }
-
-  get_github_user()
-}
-
-
-#' Retrieve GitHub account name
-#' @noRd
-get_github_user <- function() {
-  github <- gh::gh_whoami()$"login"
-
-  if (is.null(github)) {
-    stop(
-      "Unable to find GitHub username. Please run ",
-      "`?gh::gh_whoami` for more information."
-    )
-  }
-
-  github
 }
 
 
@@ -452,4 +419,147 @@ assert_valid_issue_template_name <- function(name) {
   }
 
   invisible(NULL)
+}
+
+
+#' Assert git protocol
+#' @param meta a list of the user information.
+#' @noRd
+assert_valid_git_protocol <- function(meta) {
+  if (!is.null(meta$protocol)) {
+    if (!(meta$protocol %in% c("https", "ssh"))) {
+      stop(
+        "Argument 'protocol' must be equal to 'https' or 'ssh'",
+        call. = FALSE
+      )
+    }
+  }
+
+  invisible(NULL)
+}
+
+
+#' Assert user information
+#' @param meta a list of the user information.
+#' @noRd
+assert_valid_credentials <- function(meta) {
+  if (!is.null(meta)) {
+    if ("given" %in% names(meta)) {
+      given <- meta[["given"]]
+      stop_if_not_string(given)
+    }
+
+    if ("family" %in% names(meta)) {
+      family <- meta[["family"]]
+      stop_if_not_string(family)
+    }
+
+    if ("email" %in% names(meta)) {
+      email <- meta[["email"]]
+      stop_if_not_string(email)
+    }
+
+    if ("orcid" %in% names(meta)) {
+      orcid <- meta[["orcid"]]
+      stop_if_not_string(orcid)
+    }
+
+    if ("github_user" %in% names(meta)) {
+      github_user <- meta[["github_user"]]
+      stop_if_not_string(github_user)
+    }
+
+    if (!is.null(meta[["protocol"]])) {
+      if ("protocol" %in% names(meta)) {
+        protocol <- meta[["protocol"]]
+        stop_if_not_string(protocol)
+      }
+    }
+  }
+
+  invisible(NULL)
+}
+
+
+#' Set default git protocol to https and/or rename to 'usethis.protocol'
+#' @param meta a list of the user information.
+#' @noRd
+set_default_git_protocol <- function(meta) {
+  if (!("protocol" %in% names(meta))) {
+    meta[["usethis.protocol"]] <- "https"
+  } else {
+    meta[["usethis.protocol"]] <- meta[["protocol"]]
+    meta <- meta[!(names(meta) %in% "protocol")]
+  }
+
+  meta
+}
+
+
+#' Return TRUE if the user provide information
+#' @param meta a list of the user information.
+#' @noRd
+should_edit_r_profile <- function(meta) {
+  if (length(meta) > 0) {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
+
+#' Create information message to edit the user .Rprofile
+#' @param meta a list of the user information.
+#' @noRd
+create_r_profile_content <- function(meta) {
+  r_prof <- "## rcompendium credentials ----"
+
+  opts <- paste0("\n  ", names(meta), " = \"", unlist(meta), "\"")
+  opts <- paste0(opts, collapse = ", ")
+
+  c(r_prof, paste0("options(", opts, "\n)", ""))
+}
+
+
+#' Display information message to edit the user .Rprofile
+#' @param content a character of length 1.
+#' @noRd
+ui_r_profile_content <- function(content) {
+  cli::cli_alert_warning(
+    paste0(
+      "Please copy and paste the following lines to the ",
+      "{.file {build_r_profile_path()}}:"
+    )
+  )
+
+  cat("\n")
+  cli::cli_code(format(content))
+
+  invisible(NULL)
+}
+
+
+#' Build the path to the user .Rprofile
+#' @noRd
+build_r_profile_path <- function() {
+  custom_r_profile_path <- Sys.getenv("R_PROFILE_USER")
+  if (custom_r_profile_path != "") {
+    r_profile_path <- custom_r_profile_path
+  } else {
+    r_profile_path <- file.path(fs::path_home_r(), ".Rprofile")
+  }
+
+  r_profile_path
+}
+
+
+#' Create the user .Rprofile (if required) and return the path
+#' @noRd
+create_r_profile_if_needed <- function() {
+  r_profile_path <- build_r_profile_path()
+  if (!file.exists((r_profile_path))) {
+    invisible(file.create(r_profile_path))
+  }
+
+  invisible(r_profile_path)
 }
