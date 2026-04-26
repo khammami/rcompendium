@@ -17,7 +17,7 @@ test_that("stop_if_not_project() errors", {
 test_that("stop_if_not_project() works", {
   with_local_project({
     initialize_project(quiet = TRUE)
-    
+
     expect_silent(stop_if_not_project())
   })
 
