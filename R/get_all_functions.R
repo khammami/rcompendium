@@ -4,7 +4,7 @@
 #' This function returns a list of all the functions (exported and internal)
 #' available with the project. As this function scans the `NAMESPACE` and the
 #' `R/` folder, it is recommended to:
-#' 
+#'
 #' - store all the functions in the `R/` folder
 #' - run [devtools::document()] before to update the `NAMESPACE`
 #'
