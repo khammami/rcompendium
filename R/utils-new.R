@@ -19,7 +19,7 @@ build_rel_path <- function(...) {
 #' @param overwrite a logical of length 1.
 #' @noRd
 assert_file_not_exists_or_overwrite <- function(path, overwrite) {
-  if (file.exists(build_full_path(path)) && !overwrite) {
+  if (file.exists(path) && !overwrite) {
     stop(
       paste0(
         "The file '",
