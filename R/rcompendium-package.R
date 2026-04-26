@@ -25,7 +25,7 @@
 #' @section Managing credentials:
 #'
 #' You can use the arguments `given`, `family`, `email`, and `orcid`
-#' directly with the functions `create_new_*()` and `add_*()`. But if you 
+#' directly with the functions `create_new_*()` and `add_*()`. But if you
 #' create a lot a projects (packages and/or compendia) it can be frustrating in
 #' the long run.
 #'
