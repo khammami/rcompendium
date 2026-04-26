@@ -623,7 +623,7 @@ assert_project_file_detected <- function() {
 #' Error if the R/ directory does not exist
 #' @noRd
 stop_if_missing_r_dir <- function() {
-  if (!dir.exists(file.path(path_proj(), "R"))) {
+  if (!dir.exists("R")) {
     stop("The directory 'R/' cannot be found.", call. = FALSE)
   }
 
@@ -635,7 +635,7 @@ stop_if_missing_r_dir <- function() {
 #' @noRd
 get_r_file_paths <- function() {
   list.files(
-    path = file.path(path_proj(), "R"),
+    path = "R",
     pattern = "\\.R$",
     full.names = TRUE,
     ignore.case = TRUE
@@ -684,9 +684,9 @@ extract_r_function_names <- function(x) {
 #' Extract the name of the exported functions in the NAMESPACE
 #' @noRd
 extract_exported_r_function_names <- function() {
-  if (file.exists(file.path(path_proj(), "NAMESPACE"))) {
+  if (file.exists(file.path("NAMESPACE"))) {
     namespace <- readLines(
-      con = file.path(path_proj(), "NAMESPACE"),
+      con = file.path("NAMESPACE"),
       warn = FALSE
     )
 
