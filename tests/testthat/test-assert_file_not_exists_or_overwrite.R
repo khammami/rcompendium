@@ -2,8 +2,9 @@
 
 test_that("assert_file_not_exists_or_overwrite() errors", {
   with_local_project({
-    invisible(file.create(".here"))
-    invisible(file.create(build_full_path("README")))
+    initialize_project(quiet = TRUE)
+
+    invisible(file.create("README"))
 
     expect_error(
       assert_file_not_exists_or_overwrite("README", overwrite = FALSE),
@@ -18,8 +19,17 @@ test_that("assert_file_not_exists_or_overwrite() errors", {
 
 test_that("assert_file_not_exists_or_overwrite() works - overwrite is TRUE", {
   with_local_project({
-    invisible(file.create(".here"))
-    invisible(file.create(build_full_path("README")))
+    initialize_project(quiet = TRUE)
+
+    expect_silent(
+      assert_file_not_exists_or_overwrite("README", overwrite = TRUE)
+    )
+
+    expect_null(
+      x <- assert_file_not_exists_or_overwrite("README", overwrite = TRUE)
+    )
+
+    invisible(file.create("README"))
 
     expect_silent(
       assert_file_not_exists_or_overwrite("README", overwrite = TRUE)
@@ -33,14 +43,14 @@ test_that("assert_file_not_exists_or_overwrite() works - overwrite is TRUE", {
 
 test_that("assert_file_not_exists_or_overwrite() works - file not exists", {
   with_local_project({
-    invisible(file.create(".here"))
+    initialize_project(quiet = TRUE)
 
     expect_silent(
-      assert_file_not_exists_or_overwrite("DESCRIPTION", overwrite = FALSE)
+      assert_file_not_exists_or_overwrite("README", overwrite = FALSE)
     )
 
     expect_null(
-      x <- assert_file_not_exists_or_overwrite("DESCRIPTION", overwrite = FALSE)
+      x <- assert_file_not_exists_or_overwrite("README", overwrite = FALSE)
     )
   })
 })

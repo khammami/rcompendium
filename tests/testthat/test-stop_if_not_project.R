@@ -16,7 +16,8 @@ test_that("stop_if_not_project() errors", {
 
 test_that("stop_if_not_project() works", {
   with_local_project({
-    file.create(".here")
+    initialize_project(quiet = TRUE)
+
     expect_silent(stop_if_not_project())
   })
 
@@ -43,6 +44,26 @@ test_that("stop_if_not_project() works", {
 
   with_local_project({
     file.create("pkgtest.Rproj")
+    expect_silent(stop_if_not_project())
+  })
+
+  with_local_project({
+    file.create("_pkgdown.yaml")
+    expect_silent(stop_if_not_project())
+  })
+
+  with_local_project({
+    file.create("_pkgdown.yml")
+    expect_silent(stop_if_not_project())
+  })
+
+  with_local_project({
+    file.create("_quarto.yaml")
+    expect_silent(stop_if_not_project())
+  })
+
+  with_local_project({
+    file.create("_quarto.yml")
     expect_silent(stop_if_not_project())
   })
 })

@@ -130,11 +130,13 @@ proj_in_proj <- function() {
 #'
 #' @noRd
 
-ui_title <- function(texte) {
-  cli::cat_line()
-  cat(cli::symbol$radio_on, cli::style_bold(cli::style_underline(texte)))
-  cli::cat_line()
-  cli::cat_line()
+ui_title <- function(texte, quiet = FALSE) {
+  if (!quiet) {
+    cli::cat_line()
+    cat(cli::symbol$radio_on, cli::style_bold(cli::style_underline(texte)))
+    cli::cat_line()
+    cli::cat_line()
+  }
 
   invisible(NULL)
 }

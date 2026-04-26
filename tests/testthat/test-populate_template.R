@@ -2,7 +2,7 @@
 
 test_that("populate_template() works - no metadata", {
   with_local_project({
-    invisible(file.create(".here"))
+    initialize_project(quiet = TRUE)
 
     path <- build_full_path("LICENSE")
 
@@ -23,7 +23,7 @@ test_that("populate_template() works - no metadata", {
 
 test_that("populate_template() works - unused metadata", {
   with_local_project({
-    invisible(file.create(".here"))
+    initialize_project(quiet = TRUE)
 
     path <- build_full_path("LICENSE")
 
@@ -44,7 +44,7 @@ test_that("populate_template() works - unused metadata", {
 
 test_that("populate_template() works - one used metadata", {
   with_local_project({
-    invisible(file.create(".here"))
+    initialize_project(quiet = TRUE)
 
     path <- build_full_path("LICENSE")
 
@@ -65,7 +65,7 @@ test_that("populate_template() works - one used metadata", {
 
 test_that("populate_template() works - one used metadata & one is NULL", {
   with_local_project({
-    invisible(file.create(".here"))
+    initialize_project(quiet = TRUE)
 
     path <- build_full_path("LICENSE")
 
@@ -86,7 +86,7 @@ test_that("populate_template() works - one used metadata & one is NULL", {
 
 test_that("populate_template() works - many used metadata", {
   with_local_project({
-    invisible(file.create(".here"))
+    initialize_project(quiet = TRUE)
 
     path <- build_full_path("LICENSE")
 

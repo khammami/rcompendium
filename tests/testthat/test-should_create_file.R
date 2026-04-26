@@ -2,7 +2,7 @@
 
 test_that("should_create_file() works - file not exists", {
   with_local_project({
-    invisible(file.create(".here"))
+    initialize_project(quiet = TRUE)
 
     expect_true(
       should_create_file("README", overwrite = FALSE)
@@ -16,7 +16,8 @@ test_that("should_create_file() works - file not exists", {
 
 test_that("should_create_file() works - file exists", {
   with_local_project({
-    invisible(file.create(".here"))
+    initialize_project(quiet = TRUE)
+
     invisible(file.create("README"))
 
     expect_false(

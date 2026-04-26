@@ -19,7 +19,7 @@ build_rel_path <- function(...) {
 #' @param overwrite a logical of length 1.
 #' @noRd
 assert_file_not_exists_or_overwrite <- function(path, overwrite) {
-  if (file.exists(build_full_path(path)) && !overwrite) {
+  if (file.exists(path) && !overwrite) {
     stop(
       paste0(
         "The file '",
@@ -205,16 +205,7 @@ stop_if_null_or_empty <- function(value, name) {
 #' Error if the current working directory is not a project/package
 #' @noRd
 stop_if_not_project <- function() {
-  markers <- c(
-    "DESCRIPTION",
-    ".git",
-    paste0(basename(getwd()), ".Rproj"),
-    ".here",
-    "renv.lock",
-    ".vscode/settings.json"
-  )
-
-  if (all(!file.exists(markers))) {
+  if (!assert_project_file_detected()) {
     stop(paste0(
       "The path '",
       getwd(),
@@ -562,4 +553,68 @@ create_r_profile_if_needed <- function() {
   }
 
   invisible(r_profile_path)
+}
+
+
+#' Initialize project (create .here if require)
+#' @param quiet a logical of length 1.
+#' @noRd
+initialize_project <- function(quiet = FALSE) {
+  ui_title("Initializing project", quiet)
+
+  if (!assert_project_file_detected()) {
+    content <- list.files(getwd(), all.files = TRUE, no.. = TRUE)
+    if (length(content) == 0) {
+      invisible(file.create(".here"))
+      ui_file_written(".here", quiet)
+    } else {
+      stop(
+        paste0(
+          "The path '",
+          getwd(),
+          "' is not empty and does not appear to be an R project."
+        )
+      )
+    }
+  }
+
+  ui_project_initialized(getwd(), quiet)
+  invisible(NULL)
+}
+
+
+#' Inform user that the project has been initiliazed
+#' @param path a character of length of 1. The absolute path of the project.
+#' @param quiet a logical of length 1.
+#' @noRd
+ui_project_initialized <- function(path, quiet = FALSE) {
+  if (!quiet) {
+    cli::cli_alert_success("Setting active project to {.val {path}}")
+  }
+
+  invisible(NULL)
+}
+
+
+#' Assert if current directory is an R project
+#' @noRd
+assert_project_file_detected <- function() {
+  markers <- c(
+    "DESCRIPTION",
+    ".git",
+    paste0(basename(getwd()), ".Rproj"),
+    ".here",
+    "renv.lock",
+    ".vscode/settings.json",
+    "_pkgdown.yaml",
+    "_pkgdown.yml",
+    "_quarto.yaml",
+    "_quarto.yml"
+  )
+
+  if (all(!file.exists(markers))) {
+    return(FALSE)
+  } else {
+    return(TRUE)
+  }
 }
