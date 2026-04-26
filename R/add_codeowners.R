@@ -6,6 +6,7 @@
 #' repository.
 #'
 #' @inheritParams add_citation
+#' @inheritParams set_credentials
 #'
 #' @return No return value.
 #'
@@ -19,6 +20,7 @@
 #' }
 
 add_codeowners <- function(
+  github_user = NULL,
   open = FALSE,
   overwrite = FALSE,
   quiet = FALSE
@@ -31,13 +33,15 @@ add_codeowners <- function(
 
   assert_file_not_exists_or_overwrite(rel_path, overwrite)
 
-  meta <- resolve_project_meta()
+  meta <- resolve_project_meta(
+    github_user = github_user
+  )
 
   if (should_create_file(full_path, overwrite)) {
     ensure_dir_exists(dirname(full_path))
 
     writeLines(
-      text = paste0("* @", get_github_user()),
+      text = paste0("* @", meta$github_user),
       con = full_path
     )
 

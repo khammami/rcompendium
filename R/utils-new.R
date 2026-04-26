@@ -45,6 +45,8 @@ resolve_project_meta <- function(...) {
   family <- args$family %||% getOption("family")
   email <- args$email %||% getOption("email")
   orcid <- args$orcid %||% getOption("orcid")
+  github_user <- args$github_user %||% getOption("github_user")
+  github_account <- args$organisation %||% github_user
 
   list(
     given = given,
@@ -57,8 +59,8 @@ resolve_project_meta <- function(...) {
     license = get_project_license_name(),
     license_url = get_project_license_url(),
 
-    github_user = get_github_user(),
-    github_account = resolve_github_account(args$organisation),
+    github_user = github_user,
+    github_account = github_account,
     git_branch = get_git_branch_name(),
 
     r_version = paste(
@@ -72,36 +74,6 @@ resolve_project_meta <- function(...) {
     year = format(Sys.Date(), "%Y"),
     date = format(Sys.time(), "%Y/%m/%d")
   )
-}
-
-
-#' Retrieve GitHub account of the repo
-#' @param organisation a character of length 1 (optional). The name of the GH
-#'   organisation. If `NULL` (default), the user account is used.
-#' @noRd
-resolve_github_account <- function(organisation = NULL) {
-  if (!is.null(organisation)) {
-    stop_if_not_string(organisation)
-    return(organisation)
-  }
-
-  get_github_user()
-}
-
-
-#' Retrieve GitHub account name
-#' @noRd
-get_github_user <- function() {
-  github <- gh::gh_whoami()$"login"
-
-  if (is.null(github)) {
-    stop(
-      "Unable to find GitHub username. Please run ",
-      "`?gh::gh_whoami` for more information."
-    )
-  }
-
-  github
 }
 
 

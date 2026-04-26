@@ -4,9 +4,17 @@
 \alias{add_codeowners}
 \title{Create a CODEOWNERS file}
 \usage{
-add_codeowners(open = FALSE, overwrite = FALSE, quiet = FALSE)
+add_codeowners(
+  github_user = NULL,
+  open = FALSE,
+  overwrite = FALSE,
+  quiet = FALSE
+)
 }
 \arguments{
+\item{github_user}{a \code{character} of length 1. The GitHub account name of the
+user (considered as the maintainer and code owner of the project).}
+
 \item{open}{A logical value. If \code{TRUE} (default) the file is opened in the
 editor.}
 
