@@ -20,8 +20,8 @@ several OS, test code with 'testthat', and build and deploy website using
 \item Store your credentials (given and family names, email, ORCID, etc.) with
 \code{\link[=set_credentials]{set_credentials()}} (if not already done);
 \item Create an new empty RStudio project;
-\item Run \code{\link[=new_package]{new_package()}} to create a new package structure or
-\code{\link[=new_compendium]{new_compendium()}} to create a new research compendium structure;
+\item Run \code{\link[=create_new_package]{create_new_package()}} to create a new package structure or
+\code{\link[=create_new_compendium]{create_new_compendium()}} to create a new research compendium structure;
 \item Edit some metadata in \code{DESCRIPTION}, \code{CITATION}, and \code{README.Rmd};
 \item Start working (add data, write and document R functions, etc.);
 \item And do not forget to commit your changes.
@@ -32,9 +32,9 @@ several OS, test code with 'testthat', and build and deploy website using
 
 
 You can use the arguments \code{given}, \code{family}, \code{email}, and \code{orcid}
-directly with the functions \verb{new_*()} and \verb{add_*()}. But if you create
-a lot a projects (packages and/or compendia) it can be frustrating in the
-long run.
+directly with the functions \verb{create_new_*()} and \verb{add_*()}. But if you
+create a lot a projects (packages and/or compendia) it can be frustrating in
+the long run.
 
 An alternative way is to use \strong{ONCE AND FOR ALL} the function
 \code{\link[=set_credentials]{set_credentials()}} to permanently store this information in the
@@ -44,7 +44,7 @@ It will save your time (it's the purpose of this package).
 
 Even if you have stored your credentials in the \verb{~/.Rprofile} file you will
 always be able to modify them on-the-fly (i.e. by using credentials arguments
-in the functions \verb{new_*()} and \verb{add_*()}) or permanently by re-running
+in the functions \verb{create_new_*()} and \verb{add_*()}) or permanently by re-running
 \code{\link[=set_credentials]{set_credentials()}}.
 }
 

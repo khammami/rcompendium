@@ -31,7 +31,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ## Package content
 
 First, create a **new empty RStudio project**. Let's called it `pkg`. 
-To create a new package structure, run `rcompendium::new_package()`.
+To create a new package structure, run `rcompendium::create_new_package()`.
 
 By default, the following content is created:
 

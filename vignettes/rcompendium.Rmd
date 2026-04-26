@@ -123,7 +123,7 @@ Then you will be able to create a GitHub repository directly from R!
 
 
 You can use the arguments `given`, `family`, `email`, and `orcid`
-directly with the functions `new_*()` and `add_*()`. But if you create 
+directly with the functions `create_new_*()` and `add_*()`. But if you create 
 a lot a projects (packages and/or compendia) it can be frustrating in the 
 long run.
 
@@ -135,7 +135,7 @@ It will save your time (it's the purpose of this package).
 
 Even if you have stored your credentials in the `~/.Rprofile` file you will 
 always be able to modify them on-the-fly (i.e. by using credentials arguments
-in the functions `new_*()` and `add_*()`) or permanently by re-running 
+in the functions `create_new_*()` and `add_*()`) or permanently by re-running 
 `set_credentials()`.
 
 
@@ -151,7 +151,7 @@ The recommended workflow is:
 
 1. Store your credentials with `set_credentials()` (if not already done);
 2. **IMPORTANT -** Create an new empty RStudio project;
-3. Run `new_package()` to create a new package structure or `new_compendium()` 
+3. Run `create_package()` to create a new package structure or `create_new_compendium()` 
   to create a new research compendium structure;
 4. Edit some metadata in `DESCRIPTION`, `CITATION`, and `README.Rmd`;
 5. Start working (add data, write and document R functions, etc.);
@@ -159,8 +159,8 @@ The recommended workflow is:
 
 <br/>
 
-In addition to these three setup functions (`set_credentials()`, `new_package()`, 
-`new_compendium()`), the package `rcompendium` offers 29 other functions.
+In addition to these three setup functions (`set_credentials()`, `create_new_package()`, 
+`create_new_compendium()`), the package `rcompendium` offers 29 other functions.
 These can be grouped as:
 
 - `add_*()`: functions to add/update/overwrite files, configuration settings, 
@@ -192,7 +192,7 @@ rcompendium::set_credentials(given = "John", family = "Doe",
 
 ## Create an R package structure ----
 
-rcompendium::new_package()
+rcompendium::create_new_package()
 
 
 ## Then... 

@@ -34,7 +34,7 @@
 #'   `data/`, `outputs/`, `figures/`, etc. have been created in this folder),
 #'   `'.'` (if folders `data/`, `outputs/`, `figures/`, etc. have been created
 #'   at the root of the project), etc.
-#'   See [new_compendium()] for further information.
+#'   See [create_new_compendium()] for further information.
 #'
 #'   Default is `compendium = NULL` (i.e. no additional folder are inspected
 #'   but `R/`, `NAMESPACE`, `vignettes/`, and `tests/` are still inspected).

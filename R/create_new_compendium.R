@@ -4,8 +4,8 @@
 #' This function creates a research compendium (i.e. a predefined files/folders
 #' structure) to help user organizing files/folders to run analysis.
 #'
-#' In addition to common R packages files/folders (see [new_package()] for
-#' further information) this function will created these following folders:
+#' In addition to common R packages files/folders (see [create_new_package()]
+#' for further information) this function will created these following folders:
 #'
 #' * `data/`: a folder to store raw data. Note that these data must never be
 #' modified. If user want to modify them it is recommended to export new data
@@ -101,7 +101,7 @@
 #' @param create_repo A logical value. If `TRUE` (default) creates a repository
 #'   (public if `private = FALSE` or private if `private = TRUE`) on GitHub.
 #'   See the section **Creating a GitHub repo** of the help page of
-#'   [new_package()].
+#'   [create_new_package()].
 #'
 #' @param private A logical value. If `TRUE` creates a private repository on
 #'   user GitHub account (or organisation). Default is `private = FALSE`.
@@ -204,18 +204,23 @@
 #' library(rcompendium)
 #'
 #' ## Define **ONCE FOR ALL** your credentials ----
-#' set_credentials(given = "John", family = "Doe",
-#'                 email = "john.doe@@domain.com",
-#'                 orcid = "9999-9999-9999-9999", protocol = "ssh")
+#' set_credentials(
+#'   given = "John",
+#'   family = "Doe",
+#'   email = "john.doe@@domain.com",
+#'   orcid = "9999-9999-9999-9999",
+#'   github_user = "jdoe",
+#'   protocol = "ssh"
+#' )
 #'
 #' ## Create an R package ----
-#' new_compendium()
+#' create_new_compendium()
 #'
 #' ## Start adding data and developing functions and scripts ----
 #' ## ...
 #' }
 
-new_compendium <- function(
+create_new_compendium <- function(
   compendium = NULL,
   license = "GPL (>= 2)",
   status = NULL,

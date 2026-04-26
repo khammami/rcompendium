@@ -6,6 +6,8 @@
   * Remove all `add_github_actions_*()` functions. A new generic function `add_github_action()` has been implemented to set up any GitHub Action. This function downloads YAML files from the GitHub repository (see above), providing more flexibility in updating these files ([#87](https://github.com/FRBCesab/rcompendium/pull/87)).
   * `refresh()` is no more available in this version ([#91](https://github.com/FRBCesab/rcompendium/pull/91))
   * Refactor all functions by introducing new helpers ([#102](https://github.com/FRBCesab/rcompendium/pull/102))
+  * A new argument (user credential) has been implemented: `github_user`. The GitHub username is not guessed from `gh::gh_whoami()` anymore and the user needs to provide it. This new argument has been added to `set_credentials()` ([#125](https://github.com/FRBCesab/rcompendium/pull/125)) to permanently store this value.
+  * Rename `new_*()` functions in `create_new_*()`
 
 * **New features**
 
@@ -14,6 +16,7 @@
   * `add_dependabot()` creates a `.github/dependabot.yaml` file ([#102](https://github.com/FRBCesab/rcompendium/pull/102))
   * `add_github_action()` automatically creates a `.github/dependabot.yaml` file if one GitHub Action is set up ([#89](https://github.com/FRBCesab/rcompendium/pull/89))
   * `add_cran_downloads_badge()` & `add_cran_total_download_badge()` adds CRAN downloads badge to the `README.Rmd` ([#96](https://github.com/FRBCesab/rcompendium/pull/96))
+  * `add_issue_template()` creates a `.github/ISSUE_TEMPLATE` directory and store GitHub issue templates ([#119](https://github.com/FRBCesab/rcompendium/pull/119))
 
 * **Bug fixes**
 

@@ -39,7 +39,7 @@ No return value.
 This function creates a Make-like R file (\code{make.R}) at the root of the
 project based on a template. To be used only if the project is a research
 compendium. The content of this file provides some guidelines. See also
-\code{\link[=new_compendium]{new_compendium()}} for further information.
+\code{\link[=create_new_compendium]{create_new_compendium()}} for further information.
 }
 \examples{
 \dontrun{

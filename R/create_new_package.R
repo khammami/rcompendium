@@ -197,7 +197,7 @@
 #' The recommended workflow is:
 #' 1. Create an empty RStudio project;
 #' 2. Store your credentials with [set_credentials()] (if not already done);
-#' 3. Run [new_package()] to create a new package structure (and the GitHub
+#' 3. Run [create_new_package()] to create a new package structure (and the GitHub
 #'   repository);
 #' 4. Edit some metadata in `DESCRIPTION`, `CITATION`, and `README.Rmd`;
 #' 5. Implement, document & test functions (the fun part);
@@ -211,7 +211,7 @@
 #'
 #'
 #' You can use the arguments `given`, `family`, `email`, and `orcid`
-#' directly with the function [new_package()] (and others). But if you create
+#' directly with the function [create_new_package()] (and others). But if you create
 #' a lot a projects (packages and/or compendiums) it can be frustrating in the
 #' long run.
 #'
@@ -223,7 +223,7 @@
 #'
 #' Even if you have stored your information in the `.Rprofile` file you will
 #' always be able to modify them on-the-fly (i.e. by using arguments of the
-#' [new_package()]) or permanently by re-running [set_credentials()].
+#' [create_new_package()]) or permanently by re-running [set_credentials()].
 #'
 #'
 #' @section Configuring git:
@@ -299,18 +299,23 @@
 #' library(rcompendium)
 #'
 #' ## Define **ONCE FOR ALL** your credentials ----
-#' set_credentials(given = "John", family = "Doe",
-#'                 email = "john.doe@@domain.com",
-#'                 orcid = "9999-9999-9999-9999", protocol = "ssh")
+#' set_credentials(
+#'   given = "John",
+#'   family = "Doe",
+#'   email = "john.doe@@domain.com",
+#'   orcid = "9999-9999-9999-9999",
+#'   github_user = "jdoe",
+#'   protocol = "ssh"
+#' )
 #'
 #' ## Create an R package ----
-#' new_package()
+#' create_new_package()
 #'
 #' ## Start developing functions ----
 #' ## ...
 #' }
 
-new_package <- function(
+create_new_package <- function(
   license = "GPL (>= 2)",
   status = NULL,
   lifecycle = NULL,

@@ -31,7 +31,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ## Compendium content
 
 First, create a **new empty RStudio project**. Let's called it `comp`. 
-To create a new compendium structure, run `rcompendium::new_compendium()`.
+To create a new compendium structure, run `rcompendium::create_new_compendium()`.
 
 By default, the following content is created:
 
@@ -184,7 +184,7 @@ required dependencies listed in `DESCRIPTION` and R functions stored in `R/`)
 
 ### Using renv
 
-The default structure created by `rcompendium::new_compendium()` is a good 
+The default structure created by `rcompendium::create_new_compendium()` is a good 
 starting point for making analyses reproducible. You can increase reproducibility
 by using the package [`renv`](https://rstudio.github.io/renv/). 
 
@@ -195,8 +195,8 @@ Moreover `renv` provides to each project its own private package library making
 each project isolated from others.
 
 To initialize `renv` for your compendium, use `renv = TRUE` in 
-`rcompendium::new_compendium()` or call the function `rcompendium::add_renv()` 
-after `rcompendium::new_compendium()`.
+`rcompendium::create_new_compendium()` or call the function `rcompendium::add_renv()` 
+after `rcompendium::create_new_compendium()`.
 
 The `make.R` will also be updated (replacement of `remotes::install_deps()` by 
 `renv::restore()`)
@@ -231,8 +231,8 @@ More information on Docker for R users:
 
 
 To add a `Dockerfile` to your compendium, use `dockerfile = TRUE` in 
-`rcompendium::new_compendium()` or call the function `rcompendium::add_dockerfile()` 
-after `rcompendium::new_compendium()`. 
+`rcompendium::create_new_compendium()` or call the function `rcompendium::add_dockerfile()` 
+after `rcompendium::create_new_compendium()`. 
 
 By default `rcompendium` creates the following `Dockerfile`:
 
