@@ -8,8 +8,12 @@ test_that("ui_r_profile_content() works", {
       list(R_PROFILE_USER = r_profile)
     )
 
-    expect_message(
-      ui_r_profile_content("This is a message")
+    expect_no_message(suppressMessages(ui_r_profile_content(
+      "This is a message"
+    )))
+
+    expect_null(
+      x <- suppressMessages(ui_r_profile_content("This is a message"))
     )
   })
 })

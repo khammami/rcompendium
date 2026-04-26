@@ -2,7 +2,7 @@
 
 test_that("ensure_dir_exists() works - dir not exists", {
   with_local_project({
-    invisible(file.create(".here"))
+    initialize_project(quiet = TRUE)
 
     path <- build_full_path(file.path("R"))
 
@@ -22,7 +22,7 @@ test_that("ensure_dir_exists() works - dir not exists", {
 
 test_that("ensure_dir_exists() works - dir exists", {
   with_local_project({
-    invisible(file.create(".here"))
+    initialize_project(quiet = TRUE)
 
     path <- build_full_path(file.path("man"))
     dir.create(path, recursive = TRUE, showWarnings = FALSE)

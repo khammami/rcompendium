@@ -2,7 +2,7 @@
 
 test_that("add_description() errors - Logical args", {
   with_local_project({
-    file.create(".here")
+    initialize_project(quiet = TRUE)
 
     expect_error(add_description(open = 0))
     expect_error(add_description(quiet = 0))
@@ -21,7 +21,7 @@ test_that("add_description() errors - Logical args", {
 
 test_that("add_description() errors - set_credentials() not used", {
   with_local_project({
-    file.create(".here")
+    initialize_project(quiet = TRUE)
 
     withr::local_options(
       list(
