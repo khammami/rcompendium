@@ -15,8 +15,12 @@ A list of two vectors:
 }
 \description{
 This function returns a list of all the functions (exported and internal)
-available with the package. As this function scans the \code{NAMESPACE} and the
-\verb{R/} folder, it is recommended to run \code{\link[devtools:document]{devtools::document()}} before.
+available with the project. As this function scans the \code{NAMESPACE} and the
+\verb{R/} folder, it is recommended to:
+\itemize{
+\item store all the functions in the \verb{R/} folder
+\item run \code{\link[devtools:document]{devtools::document()}} before to update the \code{NAMESPACE}
+}
 }
 \examples{
 \dontrun{

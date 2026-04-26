@@ -20,6 +20,9 @@
 
 * **Bug fixes**
 
+  * `rcompendium` adds support for IDE other than RStudio (Positron, VSCode, etc.). It creates an empty `.here` file if the current directory is empty and no project file is found (`.vscode/settings.json`, `.git`, etc.)
+  * `get_all_functions()` now do not detect functions defined in `tryCatch()` ([#131](https://github.com/FRBCesab/rcompendium/pull/131))
+
 * **Minor changes**
 
   * Set up Air formatter for the repository ([#76](https://github.com/FRBCesab/rcompendium/pull/76))
