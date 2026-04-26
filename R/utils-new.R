@@ -1,13 +1,8 @@
-#' Get project full path
-#' @noRd
-get_proj_path <- function() usethis::proj_get()
-
-
 #' Build an absolute path
 #' @param ... one or several folder/file names
 #' @noRd
 build_full_path <- function(...) {
-  file.path(get_proj_path(), ...)
+  file.path(path_proj(), ...)
 }
 
 
