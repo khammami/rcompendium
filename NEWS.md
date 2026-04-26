@@ -20,6 +20,8 @@
 
 * **Bug fixes**
 
+  * `rcompendium` adds support for IDE other than RStudio (Positron, VSCode, etc.). It creates an empty `.here` file if the current directory is empty and no project file is found (`.vscode/settings.json`, `.git`, etc.)
+
 * **Minor changes**
 
   * Set up Air formatter for the repository ([#76](https://github.com/FRBCesab/rcompendium/pull/76))
